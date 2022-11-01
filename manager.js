@@ -17,6 +17,7 @@ setInterval(() => {
         time: new Date(),
         'Airline': `${randomAirline()} Airlines`,
         'Destination': `${faker.address.city()}, ${faker.address.country()}`,
+        event: 'newFlight'
     }
     events.emit('newFlight', flightDetails);
 }, 10000);
@@ -24,11 +25,13 @@ setInterval(() => {
 const handleNewFlight = (payload) => {
     console.log('manager', payload);
 }
+
 events.on('newFlight', handleNewFlight);
 
 // when a flight arrives, emit the event flightarrival and salute the pilot
 
 events.on('flightArrival', (payload) => {
+    payload.event = 'flightArrival';
     console.log(`Manager: I am thankful to our wonderful pilot, ${payload.pilotName} for landing all the passengers safely. Welcome ${payload.Destination}`);
 });
 

@@ -6,7 +6,8 @@ require( './manager.js' );
 
 events.on( 'newFlight', (flightDetails) => {
     setInterval(() => {
-        console.log(`Captain ${flightDetails.pilotName}: flight with ID '${flightDetails.flightID}' is taking off..`);
+        flightDetails.event = 'takeoff';
+        console.log(`Captain ${flightDetails.pilotName}: flight with ID '${flightDetails.flightID}' is taking off.. pilotfile`);
         events.emit('takeoff', flightDetails);
     }, 14000);
     setInterval(() => {
